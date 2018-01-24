@@ -27,7 +27,7 @@ The `Base Image with Bioconductor` definition is into the `bioconductor` directo
 docker build -t ncbihackathon/bioconductor Docker/bioconductor .
 ```
 
-### Using the image
+### Using R
 
 Creates a `data` directory to be mounted into the Docker container.
 
@@ -41,6 +41,42 @@ For R scripts store in the `data` directory:
 docker run -it -v `pwd`/data:/data ncbihackathon/bioconductor Rscript --vanilla my_R_test.R
 ```
 
+### Extending the image
+
+To extend this image installing additional R packages you should create a `Dockerfile` modifiying this template with your requirements.
+
+
+```
+# Base Image
+FROM ncbihackathon/bioconductor:latest
+
+# Metadata
+LABEL base.image="bioconductor:latest"
+LABEL version="1"
+LABEL software="NCBI Hackathon Image with Bioconductor and Extra R packages"
+LABEL software.version="0.0.1"
+LABEL description="NCBI Hackathons Image with Bioconductor and Extra R packages"
+
+# Modify these next lines
+LABEL website="https://github.com/NCBI-Hackathons/HackathonDockerImages"
+LABEL documentation="https://github.com/NCBI-Hackathons/HackathonDockerImages"
+LABEL license="https://github.com/NCBI-Hackathons/HackathonDockerImages/LICENSE"
+LABEL tags="NCBI, Hackathon, Bioconductor"
+
+# Maintainer
+MAINTAINER Roberto Vera Alvarez <r78v10a07@gmail.com>
+
+USER root
+
+RUN R -e "install.packages('plotly', repos = 'http://cran.us.r-project.org')" && \
+    R -e "install.packages('dplyr', repos = 'http://cran.us.r-project.org')" && \
+    R -e "install.packages('reshape2', repos = 'http://cran.us.r-project.org')"
+
+USER biodocker
+
+WORKDIR /data/
+```
+
 ## Base Image with Entrez Direct
 
 The `Base Image with Entrez Direct` definition is into the `eutils` directory. This image should be build before any other image in this project.
@@ -51,8 +87,27 @@ The `Base Image with Entrez Direct` definition is into the `eutils` directory. T
 docker build -t ncbihackathon/eutils Docker/eutils .
 ```
 
-### Using the image
+### Using eUtils
 
-Creates a `data` directory to be mounted into the Docker container.
+For a simple search
+
+```
+hydrus:HackathonDockerImages> docker run ncbihackathon/eutils esearch -db pubmed -query Human
+<ENTREZ_DIRECT>
+  <Db>pubmed</Db>
+  <WebEnv>NCID_1_16997612_130.14.22.215_9001_1516807053_874294722_0MetA0_S_MegaStore_F_1</WebEnv>
+  <QueryKey>1</QueryKey>
+  <Count>17437321</Count>
+  <Step>1</Step>
+</ENTREZ_DIRECT>
+```
+
+For a complex search using `pipes` you should create a bash script. Then, creates a `data` directory to be mounted into the Docker container and put your bash script on it.
+
+Run your script like this
+
+```
+docker run -it -v `pwd`/data:/data ncbihackathon/eutils my_eutils_test.sh
+```
 
 
