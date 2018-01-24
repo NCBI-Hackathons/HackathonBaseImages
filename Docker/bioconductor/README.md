@@ -2,10 +2,12 @@
 
 The `Base Image with Bioconductor` definition is into the `bioconductor` directory. This image should be build before any other image in this project.
 
+The image is based on R version 3.2.3 (2015-12-10) -- “Wooden Christmas-Tree”
+
 ## Building the image
 
 ```
-docker build -t ncbihackathon/bioconductor Docker/bioconductor .
+docker build -t ncbihackathon/bioconductor Docker/bioconductor
 ```
 
 ## Using R
