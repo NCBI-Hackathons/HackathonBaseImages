@@ -21,18 +21,38 @@ docker build -t ncbihackathon/ncbihackathonbase Docker/base .
 
 The `Base Image with Bioconductor` definition is into the `bioconductor` directory. This image should be build before any other image in this project.
 
+### Building the image
+
 ```
 docker build -t ncbihackathon/bioconductor Docker/bioconductor .
 ```
 
+### Using the image
+
+Creates a `data` directory to be mounted into the Docker container.
+
+```
+docker run -it -v `pwd`/data:/data ncbihackathon/bioconductor R
+```
+
+For R scripts store in the `data` directory:
+
+```
+docker run -it -v `pwd`/data:/data ncbihackathon/bioconductor Rscript --vanilla my_R_test.R
+```
 
 ## Base Image with Entrez Direct
 
 The `Base Image with Entrez Direct` definition is into the `eutils` directory. This image should be build before any other image in this project.
 
+### Building the image
+
 ```
 docker build -t ncbihackathon/eutils Docker/eutils .
 ```
 
+### Using the image
+
+Creates a `data` directory to be mounted into the Docker container.
 
 
