@@ -22,7 +22,7 @@ docker build -t ncbihackathon/ncbihackathonbase Docker/base .
 The `Base Image with Bioconductor` definition is into the `bioconductor` directory. This image should be build before any other image in this project.
 
 ```
-docker build -t ncbihackathon/ncbihackathonbase Docker/bioconductor .
+docker build -t ncbihackathon/bioconductor Docker/bioconductor .
 ```
 
 
@@ -31,7 +31,7 @@ docker build -t ncbihackathon/ncbihackathonbase Docker/bioconductor .
 The `Base Image with Entrez Direct` definition is into the `eutils` directory. This image should be build before any other image in this project.
 
 ```
-docker build -t ncbihackathon/ncbihackathonbase Docker/eutils .
+docker build -t ncbihackathon/eutils Docker/eutils .
 ```
 
 
