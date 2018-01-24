@@ -14,7 +14,7 @@ git clone https://github.com/NCBI-Hackathons/HackathonBaseImages
 The `Base Image` definition is into the `base` directory. This image should be build before any other image in this project.
 
 ```
-docker build -t ncbihackathon/ncbihackathonbase Docker/base .
+docker build -t ncbihackathon/ncbihackathonbase Docker/base
 ```
 
 ## Base Image with Bioconductor
@@ -24,7 +24,7 @@ The `Base Image with Bioconductor` definition is into the `bioconductor` directo
 ### Building the image
 
 ```
-docker build -t ncbihackathon/bioconductor Docker/bioconductor .
+docker build -t ncbihackathon/bioconductor Docker/bioconductor
 ```
 
 ### Using R
@@ -84,7 +84,7 @@ The `Base Image with Entrez Direct` definition is into the `eutils` directory. T
 ### Building the image
 
 ```
-docker build -t ncbihackathon/eutils Docker/eutils .
+docker build -t ncbihackathon/eutils Docker/eutils
 ```
 
 ### Using eUtils
@@ -154,3 +154,24 @@ RUN cd $DST && \
 
 WORKDIR /data/
 ```
+
+## Base Image for NGS data analysis
+
+The `Base Image for NGS data analysis` definition is into the `ngs` directory. This image should be build before any other image in this project.
+
+### Building the image
+
+```
+docker build -t ncbihackathon/ngs Docker/ngs
+```
+
+### Software included
+
+This image currently include:
+
+* Samtools (version 1.6)
+* BAMTools (version 2.5.1)
+* STAR (version 2.5.3a)
+* NCBI-magicblast (version 1.3.0)
+
+Please, send us a request if you would like to include any other software in this image.

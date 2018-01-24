@@ -2,10 +2,12 @@
 
 The `Base Image with Entrez Direct` definition is into the `eutils` directory. This image should be build before any other image in this project.
 
+The image is based on Entrez Direct version 7.80.20180123.
+
 ## Building the image
 
 ```
-docker build -t ncbihackathon/eutils Docker/eutils .
+docker build -t ncbihackathon/eutils Docker/eutils
 ```
 
 ## Using eUtils
